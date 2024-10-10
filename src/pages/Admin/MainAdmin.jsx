@@ -1,3 +1,4 @@
+import HeaderAdmin from "../../Components/MainComponents/admin/HeaderAdmin";
 import SidebarAdmin from "../../Components/MainComponents/admin/SidebarAdmin";
 
 const MainAdmin = () => {
@@ -8,11 +9,11 @@ const MainAdmin = () => {
       </aside>
       <div className="flex-1 flex flex-col">
         <header className="bg-[#FFFFFF] text-white p-4">
-          <h1 className="text-2xl">Dashboard Header</h1>
+          <HeaderAdmin/>
         </header>
         <main className="flex-1 p-6 bg-gray-100">
-          <h2 className="text-xl font-semibold mb-4">Content Area</h2>
-          <p>This is where the main content will go.</p>
+          <h2 className="text-xl font-semibold mb-4">Lorem, ipsum.</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil, pariatur?</p>
         </main>
       </div>
     </div>
