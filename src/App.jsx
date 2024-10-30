@@ -26,7 +26,7 @@ function App() {
           <Route path="/equipo" element={ < Equipo />} />
           <Route path="/reportes" element={ < Reportes />} />
           <Route path="/configuraciones" element={ < Configuraciones />} />
-          <Route path="/salir" element={ < salir />} />
+          {/* <Route path="/salir" element={ < salir />} /> */}
           {/* <Route path="/mainAdmin" element={ < Salir />} /> */}
         </Route>
 

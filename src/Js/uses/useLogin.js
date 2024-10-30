@@ -34,8 +34,9 @@ export const useLogin = () => {
       const roleId = data.role_id;
       if (roleId === 1) {
         navigate('/main');
+
       } else if (roleId === 2) {
-        navigate('/mainAdmin');
+        navigate('/dashboard');
       } else {
         console.error('Rol no reconocido:', roleId);
         setError('Rol no reconocido.');

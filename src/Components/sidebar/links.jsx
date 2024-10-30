@@ -6,12 +6,14 @@ import { TbReport } from "react-icons/tb";
 import { IoIosSettings } from "react-icons/io";
 import { IoIosPerson } from "react-icons/io";
 import { Link } from "react-router-dom";
+// import type { SVGProps } from 'react';
 // import { LogoIso } from "../../img/logoSI.png";
 
 export const items = [
   // {
   //   key: '1',
-  //   icon: <IoMdMenu />,
+  //   icon: <Icon icon="icon-park:home" /> ,
+  //   // icon: <IoMdMenu />,
   //   // label: <Link to="/">HOME</Link>,
   // },
   {
@@ -41,7 +43,7 @@ export const items = [
   },
   {
     key: '7',
-    label: <Link to="/salir">Salir</Link>,
+    label: <Link to="/">Salir</Link>,
     icon: <IoIosPerson className="text-[#41A8F4] text-[2rem]" />,
   },
 ];
