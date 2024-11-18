@@ -2,7 +2,13 @@ import { useState, useEffect } from "react";
 import { supabase } from "../../Js/database/supabaseClient";
 import AddUser from "./AddUser";
 import EditUser from "./EditUser";
-
+import { LiaUserEditSolid } from "react-icons/lia";
+import { MdDeleteSweep } from "react-icons/md";
+import { FaAddressBook } from "react-icons/fa";
+import 'react-tippy/dist/tippy.css'
+import {Tooltip} from 'react-tippy';
+import { GrNext } from "react-icons/gr";
+import { GrPrevious } from "react-icons/gr";
 const UserTable = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -34,7 +40,9 @@ const UserTable = () => {
   };
 
   const handleDeleteUser = async (id) => {
-    const confirmed = window.confirm("Are you sure you want to delete this user?");
+    // Estas seguro de querer borrar el usuario
+    // Are you sure you want to delete this user
+    const confirmed = window.confirm(" Estas seguro de querer borrar el usuario?");
     if (!confirmed) return;
 
     try {
@@ -85,13 +93,19 @@ const UserTable = () => {
   return (
     <div className="p-6">
       <div className="flex items-center space-x-4 mb-4">
+        <Tooltip
+        title="Agregar Usuario"
+        >
+
         <button
+        
           onClick={() => setIsAddUserModalOpen(true)}
           className="px-4 py-2 bg-blue-500 text-white rounded-lg"
         >
-          Add User
+          {/* Add User */}
+          <FaAddressBook />
         </button>
-
+        </Tooltip>
         <input
           type="text"
           placeholder="Search by username, name, or last name"
@@ -104,41 +118,56 @@ const UserTable = () => {
       {loading ? (
         <div>Loading...</div>
       ) : (
-        <div>
-          <table className="min-w-full table-auto border-collapse border border-gray-300">
-            <thead>
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
-                <th className="border p-2">Username</th>
-                <th className="border p-2">Name</th>
-                <th className="border p-2">Last Name</th>
-                <th className="border p-2">DNI</th>
-                <th className="border p-2">Phone</th>
-                <th className="border p-2">Address</th>
-                <th className="border p-2">Actions</th>
+                <th scope="col" className="px-6 py-3">Username</th>
+                <th scope="col" className="px-6 py-3">Name</th>
+                <th scope="col" className="px-6 py-3">Last Name</th>
+                <th scope="col" className="px-6 py-3">DNI</th>
+                <th scope="col" className="px-6 py-3">Phone</th>
+                <th scope="col" className="px-6 py-3">Address</th>
+                <th scope="col" className="px-6 py-3">Actions</th>
               </tr>
             </thead>
             <tbody>
               {currentRows.map((user) => (
-                <tr key={user.id}>
-                  <td className="border p-2">{user.username}</td>
-                  <td className="border p-2">{user.name}</td>
-                  <td className="border p-2">{user.lastName}</td>
-                  <td className="border p-2">{user.dni}</td>
-                  <td className="border p-2">{user.telefono}</td>
-                  <td className="border p-2">{user.direccion}</td>
+                <tr key={user.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <td className="px-6 py-4">{user.username}</td>
+                  <td className="px-6 py-4">{user.name}</td>
+                  <td className="px-6 py-4">{user.lastName}</td>
+                  <td className="px-6 py-4">{user.dni}</td>
+                  <td className="px-6 py-4">{user.telefono}</td>
+                  <td className="px-6 py-4">{user.direccion}</td>
                   <td className="border p-2 space-x-2">
-                    <button
+                    <Tooltip
+                    title="Editar Usuario"
+                    >
+                      <button
                       onClick={() => handleEditUser(user)}
                       className="px-2 py-1 bg-yellow-500 text-white rounded"
                     >
-                      Edit
+                      {/* Edit */}
+                      <LiaUserEditSolid />
                     </button>
-                    <button
+
+                    </Tooltip>
+
+
+                    <Tooltip
+                    title="Eliminar Usuario"
+                    >
+                      <button
                       onClick={() => handleDeleteUser(user.id)}
                       className="px-2 py-1 bg-red-500 text-white rounded"
                     >
-                      Delete
+                      {/* Delete */}
+                      <MdDeleteSweep />
                     </button>
+                    </Tooltip>
+
+
                   </td>
                 </tr>
               ))}
@@ -147,23 +176,36 @@ const UserTable = () => {
 
           {/* Controles de paginado */}
           <div className="flex justify-between items-center mt-4">
+            <Tooltip
+              // Previous
+            title="Ir a la página anterior"
+            >
             <button
               onClick={() => handlePageChange("prev")}
               disabled={currentPage === 1}
-              className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg disabled:opacity-50"
+              className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg disabled:opacity-50 hover:bg-gray-400"
             >
-              Previous
+            <GrPrevious />
             </button>
+
+            </Tooltip>
             <span>
               Page {currentPage} of {totalPages}
             </span>
+
+            <Tooltip
+            //  Next Page
+            title="Ir a la siguiente página"
+            >
             <button
               onClick={() => handlePageChange("next")}
               disabled={currentPage === totalPages}
-              className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg disabled:opacity-50"
+              className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg disabled:opacity-50 hover:bg-gray-400"
             >
-              Next
+            <GrNext />
             </button>
+            </Tooltip>
+
           </div>
         </div>
       )}

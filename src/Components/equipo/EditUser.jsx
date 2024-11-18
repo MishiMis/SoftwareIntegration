@@ -51,6 +51,7 @@ const EditUser = ({ user, closeModal, fetchUsers }) => {
       <div className="bg-white p-6 rounded-lg shadow-lg w-96">
         <h2 className="text-lg font-bold mb-4">Edit User</h2>
 
+        
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">
