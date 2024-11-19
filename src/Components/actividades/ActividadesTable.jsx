@@ -3,6 +3,10 @@
   import { supabase } from "../../Js/database/supabaseClient";
   import AddActividades from "./AddActividades";
   import EditActividades from "./EditActividades";
+  import { LuClipboardEdit } from "react-icons/lu";
+  import { MdAutoDelete } from "react-icons/md";
+import { GrWorkshop } from "react-icons/gr";
+import {Tooltip} from 'react-tippy';
 
   const ActividadesTable = () => {
     const [actividades, setActividades] = useState([]);
@@ -52,58 +56,69 @@
     return (
       <div className="p-6">
         <h1 className="text-2xl font-semibold mb-4">Actividades</h1>
-        <button
-          onClick={() => setShowAddModal(true)}
-          className="mb-4 px-4 py-2 bg-blue-500 text-white rounded-lg"
+        <Tooltip
+        title="Crear Actividad"
         >
-          Add Activity
-        </button>
-        <table className="min-w-full bg-white border border-gray-300 rounded-lg">
-          <thead>
-            <tr>
-              <th className="px-4 py-2 border">ID</th>
-              <th className="px-4 py-2 border">User ID</th>
-              <th className="px-4 py-2 border">Type</th>
-              <th className="px-4 py-2 border">State</th>
-              <th className="px-4 py-2 border">Activity</th>
-              <th className="px-4 py-2 border">Service</th>
-              <th className="px-4 py-2 border">Hours Estimated</th>
-              <th className="px-4 py-2 border">Hours Consumed</th>
-              <th className="px-4 py-2 border">Deadline</th>
-              <th className="px-4 py-2 border">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-  {actividades.map((actividad) => (
-    <tr key={actividad.idActividad}>
-      <td className="px-4 py-2 border">{actividad.idActividad}</td>
-      <td className="px-4 py-2 border">{actividad.users?.name}</td>  {/* Mostrar el name del usuario */}
-      <td className="px-4 py-2 border">{actividad.idTipo}</td>
-      <td className="px-4 py-2 border">{actividad.idEstado}</td>
-      <td className="px-4 py-2 border">{actividad.actividad}</td>
-      <td className="px-4 py-2 border">{actividad.servicio}</td>
-      <td className="px-4 py-2 border">{actividad.horasEstimadas}</td>
-      <td className="px-4 py-2 border">{actividad.horasConsumidas}</td>
-      <td className="px-4 py-2 border">{actividad.fechaLimite}</td>
-      <td className="px-4 py-2 border">
-        <button
-          onClick={() => setEditActivityId(actividad.idActividad)}
-          className="px-2 py-1 bg-yellow-500 text-white rounded-lg mr-2"
-        >
-          Edit
-        </button>
-        <button
-          onClick={() => handleDelete(actividad.idActividad)}
-          className="px-2 py-1 bg-red-500 text-white rounded-lg"
-        >
-          Delete
-        </button>
-      </td>
-    </tr>
-  ))}
-</tbody>
+          <button
+            onClick={() => setShowAddModal(true)}
+            className="mb-4 px-4 py-2 bg-blue-500 text-white rounded-lg"
+          >
+            {/* Add Activity */}
+            <GrWorkshop/>
+          </button>
 
-        </table>
+        </Tooltip>
+
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                <th scope="col" className="px-6 py-3">ID</th>
+                <th scope="col" className="px-6 py-3">User ID</th>
+                <th scope="col" className="px-6 py-3">Type</th>
+                <th scope="col" className="px-6 py-3">State</th>
+                <th scope="col" className="px-6 py-3">Activity</th>
+                <th scope="col" className="px-6 py-3">Service</th>
+                <th scope="col" className="px-6 py-3">Hours Estimated</th>
+                <th scope="col" className="px-6 py-3">Hours Consumed</th>
+                <th scope="col" className="px-6 py-3">Deadline</th>
+                <th scope="col" className="px-6 py-3">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+    {actividades.map((actividad) => (
+      <tr key={actividad.idActividad} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+        <td scope="row" className="px-6 py-4">{actividad.idActividad}</td>
+        <td scope="row" className="px-6 py-4">{actividad.users?.name}</td>  {/* Mostrar el name del usuario */}
+        <td scope="row" className="px-6 py-4">{actividad.idTipo}</td>
+        <td scope="row" className="px-6 py-4">{actividad.idEstado}</td>
+        <td scope="row" className="px-6 py-4">{actividad.actividad}</td>
+        <td scope="row" className="px-6 py-4">{actividad.servicio}</td>
+        <td scope="row" className="px-6 py-4">{actividad.horasEstimadas}</td>
+        <td scope="row" className="px-6 py-4">{actividad.horasConsumidas}</td>
+        <td scope="row" className="px-6 py-4">{actividad.fechaLimite}</td>
+        <td scope="row" className="px-6 py-4">
+          <button
+            onClick={() => setEditActivityId(actividad.idActividad)}
+            className="px-2 py-1 bg-yellow-500 text-white rounded-lg mr-2"
+          >
+            {/* Edit */}
+            <LuClipboardEdit />
+          </button>
+          <button
+            onClick={() => handleDelete(actividad.idActividad)}
+            className="px-2 py-1 bg-red-500 text-white rounded-lg"
+          >
+            {/* Delete */}
+            <MdAutoDelete />
+          </button>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+
+          </table>
+        </div>
 
         {showAddModal && (
           <AddActividades
