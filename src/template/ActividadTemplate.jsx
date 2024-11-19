@@ -1,5 +1,4 @@
 import ActividadesTable from '@/Components/actividades/ActividadesTable'
-import React from 'react'
 
 const ActividadTemplate = () => {
   return (
