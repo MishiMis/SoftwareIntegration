@@ -24,7 +24,7 @@ export const items = [
   {
     key: '3',
     icon: <FaTasks />,
-    label: <Link to="/actividades">Actividade</Link>,
+    label: <Link to="/actividades">Actividad</Link>,
   },
   {
     key: '4',

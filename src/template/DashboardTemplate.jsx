@@ -7,8 +7,8 @@ import { Search, Bell } from "lucide-react"
 export const DashboardTemplate = () => {
   return (
     <>
-        <div className="w-full min-h-screen bg-gray-600 text-white p-4 sm:p-6 md:p-8">
-      <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 space-y-4 sm:space-y-0">
+        <div className="w-full min-h-screen bg-[#ffffff] text-black p-4 sm:p-6 md:p-8">
+      <header className="flex flex-col border-b border-gray-200 pb-5 sm:flex-row justify-between items-start sm:items-center mb-8 space-y-4 sm:space-y-0">
         <div>
           <h1 className="text-2xl font-bold">Bienvenido👋</h1>
           <p className="text-gray-400">Admin</p>
@@ -19,12 +19,12 @@ export const DashboardTemplate = () => {
             <Input
               type="text"
               placeholder="Search"
-              className="bg-gray-800 rounded-full pl-10 pr-4 w-full sm:w-64"
+              className="bg-white rounded-full pl-10 pr-4 w-full sm:w-64"
             />
           </div>
           <Bell className="text-gray-400 cursor-pointer" />
           <Avatar>
-            <AvatarImage src="/placeholder.svg?height=32&width=32" alt="User" />
+            <AvatarImage src="../assets/userSin.png" alt="User" />
             <AvatarFallback>MO</AvatarFallback>
           </Avatar>
         </div>
@@ -49,7 +49,7 @@ export const DashboardTemplate = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-        <Card className="bg-gray-800">
+        <Card className="bg-slate-200 shadow-sm" >
           <CardHeader>
             <CardTitle className="text-lg">Desarrolladores</CardTitle>
           </CardHeader>
@@ -63,7 +63,7 @@ export const DashboardTemplate = () => {
           </CardContent>
         </Card>
 
-        <Card className="bg-gray-800">
+        <Card className="bg-slate-200 shadow-sm" >
           <CardHeader>
             <CardTitle className="text-lg">18/10/2024</CardTitle>
           </CardHeader>

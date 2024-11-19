@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { supabase } from "../../Js/database/supabaseClient";
 import AddActividades from "./AddActividades";
 import EditActividades from "./EditActividades";
+import {Tooltip} from 'react-tippy';
+import { MdAddLink } from "react-icons/md";
 
 const ActividadesTable = () => {
   const [actividades, setActividades] = useState([]);
@@ -37,12 +39,19 @@ const ActividadesTable = () => {
   return (
     <div className="p-6">
       <h1 className="text-2xl font-semibold mb-4">Actividades</h1>
-      <button
-        onClick={() => setShowAddModal(true)}
-        className="mb-4 px-4 py-2 bg-blue-500 text-white rounded-lg"
+
+      <Tooltip
+      title="Agregar Actividad"
       >
-        Add Activity
-      </button>
+        <button
+          onClick={() => setShowAddModal(true)}
+          className="mb-4 px-4 py-2 bg-blue-500 text-white rounded-lg"
+        >
+          {/* Add Activity */}
+          <MdAddLink />
+        </button>
+      </Tooltip>
+
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
