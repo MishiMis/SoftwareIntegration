@@ -62,27 +62,32 @@ const EditActividades = ({ activityId, closeModal, fetchActivities }) => {
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50">
       <div className="bg-white p-6 rounded-lg shadow-xl w-96">
-        <h2 className="text-2xl font-semibold mb-4">Edit Activity</h2>
+      {/* Edit Activity */}
+        <h2 className="text-2xl font-semibold mb-4 border-b text-center uppercase">Editar Actividad</h2>
         <form onSubmit={handleSubmit}>
-          {Object.keys(formData).map((field) => (
-            <div key={field} className="mb-4">
-              <label
-                className="block text-sm font-medium text-gray-700"
-                htmlFor={field}
-              >
-                {field}
-              </label>
-              <input
-                type={field === "fechaLimite" ? "date" : "text"}
-                id={field}
-                name={field}
-                value={formData[field]}
-                onChange={handleChange}
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-                required
-              />
-            </div>
-          ))}
+          <div className="grid md:grid-cols-2 md:gap-4">
+
+          
+            {Object.keys(formData).map((field) => (
+              <div key={field} className="relative z-0 w-full mb-5 group">
+                <label
+                  className="block text-sm font-medium text-gray-700"
+                  htmlFor={field}
+                >
+                  {field}
+                </label>
+                <input
+                  type={field === "fechaLimite" ? "date" : "text"}
+                  id={field}
+                  name={field}
+                  value={formData[field]}
+                  onChange={handleChange}
+                  className="block py-0.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                  required
+                />
+              </div>
+            ))}
+          </div>
           <div className="flex justify-end space-x-4">
             <button
               type="button"

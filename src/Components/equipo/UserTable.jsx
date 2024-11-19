@@ -121,26 +121,26 @@ const UserTable = () => {
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-              <tr>
-                <th scope="col" className="px-6 py-3">Username</th>
-                <th scope="col" className="px-6 py-3">Name</th>
-                <th scope="col" className="px-6 py-3">Last Name</th>
-                <th scope="col" className="px-6 py-3">DNI</th>
-                <th scope="col" className="px-6 py-3">Phone</th>
-                <th scope="col" className="px-6 py-3">Address</th>
-                <th scope="col" className="px-6 py-3">Actions</th>
+              <tr className="[&>th]:px-6 [&>th]:py-3">
+                <th scope="col" >Username</th>
+                <th scope="col" >Name</th>
+                <th scope="col" >Last Name</th>
+                <th scope="col" >DNI</th>
+                <th scope="col" >Phone</th>
+                <th scope="col" >Address</th>
+                <th scope="col" >Actions</th>
               </tr>
             </thead>
             <tbody>
               {currentRows.map((user) => (
-                <tr key={user.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                  <td className="px-6 py-4">{user.username}</td>
-                  <td className="px-6 py-4">{user.name}</td>
-                  <td className="px-6 py-4">{user.lastName}</td>
-                  <td className="px-6 py-4">{user.dni}</td>
-                  <td className="px-6 py-4">{user.telefono}</td>
-                  <td className="px-6 py-4">{user.direccion}</td>
-                  <td className="border p-2 space-x-2">
+                <tr key={user.id} className="bg-white border-b [&>td]:px-6 [&>td]:py-4 dark:bg-gray-800 dark:border-gray-700">
+                  <td > {user.username} </td>
+                  <td > {user.name} </td>
+                  <td > {user.lastName} </td>
+                  <td > {user.dni} </td>
+                  <td > {user.telefono} </td>
+                  <td > {user.direccion} </td>
+                  <td className="space-x-2">
                     <Tooltip
                     title="Editar Usuario"
                     >

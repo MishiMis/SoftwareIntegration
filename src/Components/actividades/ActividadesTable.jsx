@@ -71,55 +71,61 @@ import {Tooltip} from 'react-tippy';
 
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-              <tr>
-                <th scope="col" className="px-6 py-3">ID</th>
-                <th scope="col" className="px-6 py-3">User ID</th>
-                <th scope="col" className="px-6 py-3">Type</th>
-                <th scope="col" className="px-6 py-3">State</th>
-                <th scope="col" className="px-6 py-3">Activity</th>
-                <th scope="col" className="px-6 py-3">Service</th>
-                <th scope="col" className="px-6 py-3">Hours Estimated</th>
-                <th scope="col" className="px-6 py-3">Hours Consumed</th>
-                <th scope="col" className="px-6 py-3">Deadline</th>
-                <th scope="col" className="px-6 py-3">Actions</th>
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 ">
+              <tr className="[&>th]:px-6 [&>th]:py-3">
+                <th scope="col" >ID</th>
+                <th scope="col" >User ID</th>
+                <th scope="col" >Type</th>
+                <th scope="col" >State</th>
+                <th scope="col" >Activity</th>
+                <th scope="col" >Service</th>
+                <th scope="col" >Hours Estimated</th>
+                <th scope="col" >Hours Consumed</th>
+                <th scope="col" >Deadline</th>
+                <th scope="col" >Actions</th>
               </tr>
             </thead>
             <tbody>
     {actividades.map((actividad) => (
-      <tr key={actividad.idActividad} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-        <td scope="row" className="px-6 py-4">{actividad.idActividad}</td>
-        <td scope="row" className="px-6 py-4">{actividad.users?.name}</td>  {/* Mostrar el name del usuario */}
-        <td scope="row" className="px-6 py-4">{actividad.idTipo}</td>
-        <td scope="row" className="px-6 py-4">{actividad.idEstado}</td>
-        <td scope="row" className="px-6 py-4">{actividad.actividad}</td>
-        <td scope="row" className="px-6 py-4">{actividad.servicio}</td>
-        <td scope="row" className="px-6 py-4">{actividad.horasEstimadas}</td>
-        <td scope="row" className="px-6 py-4">{actividad.horasConsumidas}</td>
-        <td scope="row" className="px-6 py-4">{actividad.fechaLimite}</td>
-        <td scope="row" className="px-6 py-4">
-          <button
-            onClick={() => setEditActivityId(actividad.idActividad)}
-            className="px-2 py-1 bg-yellow-500 text-white rounded-lg mr-2"
-          >
-            {/* Edit */}
-            <LuClipboardEdit />
-          </button>
-          <button
-            onClick={() => handleDelete(actividad.idActividad)}
-            className="px-2 py-1 bg-red-500 text-white rounded-lg"
-          >
-            {/* Delete */}
-            <MdAutoDelete />
-          </button>
+      <tr key={actividad.idActividad} className="bg-white border-b [&>td]:px-6 [&>td]:py-4 dark:bg-gray-800 dark:border-gray-700">
+        <td scope="row" > {actividad.idActividad}</td>
+        <td scope="row" > {actividad.users?.name}</td>  {/* Mostrar el name del usuario */}
+        <td scope="row" > {actividad.idTipo}</td>
+        <td scope="row" > {actividad.idEstado}</td>
+        <td scope="row" > {actividad.actividad}</td>
+        <td scope="row" > {actividad.servicio}</td>
+        <td scope="row" > {actividad.horasEstimadas}</td>
+        <td scope="row" > {actividad.horasConsumidas}</td>
+        <td scope="row" > {actividad.fechaLimite}</td>
+        <td scope="row" >
+          <Tooltip title="Editar Actividad">
+            <button
+              onClick={() => setEditActivityId(actividad.idActividad)}
+              className="px-2 py-1 bg-yellow-500 text-white rounded-lg mr-2"
+            >
+              {/* Edit */}
+              <LuClipboardEdit />
+            </button>
+          </Tooltip>
+
+          <Tooltip title="Borrar Actividad">
+            <button
+              onClick={() => handleDelete(actividad.idActividad)}
+              className="px-2 py-1 bg-red-500 text-white rounded-lg"
+            >
+              {/* Delete */}
+              <MdAutoDelete />
+            </button>
+          </Tooltip>
         </td>
       </tr>
     ))}
   </tbody>
 
           </table>
+          
         </div>
-
+        
         {showAddModal && (
           <AddActividades
             closeModal={() => setShowAddModal(false)}
