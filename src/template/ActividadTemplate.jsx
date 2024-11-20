@@ -1,3 +1,5 @@
+import ActividadesLeft from '@/Components/actividades/ActividadesLeft'
+import ActividadesRigth from '@/Components/actividades/ActividadesRigth'
 import ActividadesTable from '@/Components/actividades/ActividadesTable'
 
 const ActividadTemplate = () => {
@@ -8,10 +10,10 @@ const ActividadTemplate = () => {
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div className="bg-green-500 flex items-center justify-center">
-          <p>Pequeño 1</p>
+          <ActividadesRigth/>
         </div>
-        <div className="bg-red-500 flex items-center justify-center">
-          <p>Pequeño 2</p>
+        <div className="bg-[#F1F1F1] flex items-center justify-center">
+          <ActividadesLeft/>
         </div>
       </div>
     </div>

@@ -1,3 +1,4 @@
+import EquipoLeft from "@/Components/equipo/EquipoLeft";
 import UserTable from "@/Components/equipo/UserTable";
 
 const EquipoTemplate = () => {
@@ -8,7 +9,7 @@ const EquipoTemplate = () => {
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div className="bg-green-500 flex items-center justify-center">
-          <p>Pequeño 1</p>
+          <EquipoLeft/>
         </div>
         <div className="bg-red-500 flex items-center justify-center">
           <p>Pequeño 2</p>

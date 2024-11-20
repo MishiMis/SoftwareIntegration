@@ -26,7 +26,9 @@ import {Tooltip} from 'react-tippy';
           horasEstimadas,
           horasConsumidas,
           fechaLimite,
-          users(name)
+          users(name),
+          estado(nombre),
+          tipoActividad(nombre)
         `);
     
       if (error) {
@@ -90,8 +92,8 @@ import {Tooltip} from 'react-tippy';
       <tr key={actividad.idActividad} className="bg-white border-b [&>td]:px-6 [&>td]:py-4 dark:bg-gray-800 dark:border-gray-700">
         <td scope="row" > {actividad.idActividad}</td>
         <td scope="row" > {actividad.users?.name}</td>  {/* Mostrar el name del usuario */}
-        <td scope="row" > {actividad.idTipo}</td>
-        <td scope="row" > {actividad.idEstado}</td>
+        <td scope="row" > {actividad.tipoActividad?.nombre}</td>
+        <td scope="row" > {actividad.estado?.nombre}</td>
         <td scope="row" > {actividad.actividad}</td>
         <td scope="row" > {actividad.servicio}</td>
         <td scope="row" > {actividad.horasEstimadas}</td>
