@@ -7,13 +7,12 @@ const EquipoLeft = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
 
-  // Obtener usuarios de Supabase con role_id = 1
   useEffect(() => {
     const getUsers = async () => {
       const { data, error } = await supabase
         .from('users')
-        .select('id, name, role_id') // Asegúrate de seleccionar también role_id
-        .eq('role_id', 1); // Filtra solo aquellos con role_id igual a 1
+        .select('id, name, role_id')
+        .eq('role_id', 1);
 
       if (error) {
         console.error(error);
@@ -24,13 +23,11 @@ const EquipoLeft = () => {
     getUsers();
   }, []);
 
-  // Abrir el modal de chat
   const openChat = (user) => {
     setCurrentUser(user);
     setIsChatOpen(true);
   };
 
-  // Cerrar el modal de chat
   const closeChat = () => {
     setIsChatOpen(false);
     setCurrentUser(null);
