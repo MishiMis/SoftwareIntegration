@@ -1,0 +1,37 @@
+.text-container {
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace; /* Fuente estilo máquina de escribir */
+}
+
+.text {
+  display: inline-block;
+  overflow: hidden; /* Oculta el texto que está siendo animado */
+  white-space: nowrap; /* Mantiene el texto en una sola línea */
+  border-right: 2px solid black; /* Simula el cursor */
+  animation: typing 3s steps(30, end), blink 0.5s step-end infinite alternate;
+}
+
+/* Animación para escribir el texto */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Animación del cursor parpadeante */
+@keyframes blink {
+  from {
+    border-color: black;
+  }
+  to {
+    border-color: transparent;
+  }
+}
+
+/* Segunda línea: espera a que la primera termine */
+.typewriter.second {
+  animation-delay: 3.5s; /* Ajusta según la duración del texto anterior */
+}

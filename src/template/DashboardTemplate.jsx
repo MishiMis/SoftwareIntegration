@@ -26,7 +26,7 @@ export const DashboardTemplate = () => {
             <Bell className="text-gray-400 cursor-pointer" />
             <Avatar>
               <AvatarImage src="../assets/userSin.png" alt="User" />
-              <AvatarFallback>MO</AvatarFallback>
+              <AvatarFallback>AD</AvatarFallback>
             </Avatar>
           </div>
         </header>
@@ -39,7 +39,7 @@ export const DashboardTemplate = () => {
           </div>
           {/* Parte inferior dividida en dos columnas */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-gray-200 rounded-lg p-4">
+            <div className="bg-gray-200 rounded-lg p-4 ">
               <ActivitiesCalendar/>
             </div>
             <div className="bg-gray-200 rounded-lg p-4">
