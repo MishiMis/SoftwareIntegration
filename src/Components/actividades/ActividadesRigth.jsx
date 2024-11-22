@@ -34,21 +34,21 @@ const ActividadesRigth = () => {
   };
 
   return (
-    <div>
+    <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <h2>Actividades</h2>
       {/* Tabla de actividades */}
-      <table className="min-w-full table-auto border-collapse border border-gray-200">
-        <thead>
+      <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
-            <th className="border border-gray-300 p-2">Actividad</th>
-            <th className="border border-gray-300 p-2">Acción</th>
+            <th scope="col" className="px-6 py-3">Actividad</th>
+            <th scope="col" className="px-6 py-3">Acción</th>
           </tr>
         </thead>
         <tbody>
           {activities.map((activity, index) => (
-            <tr key={index}>
-              <td className="border border-gray-300 p-2">{activity.actividad}</td>
-              <td className="border border-gray-300 p-2">
+            <tr key={index} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+              <td className="px-6 py-4">{activity.actividad}</td>
+              <td className="px-6 py-4">
                 <button
                   className="bg-blue-500 text-white px-4 py-2 rounded"
                   onClick={openModal}

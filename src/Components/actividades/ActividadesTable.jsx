@@ -6,6 +6,8 @@ import { LuClipboardEdit } from "react-icons/lu";
 import { MdAutoDelete } from "react-icons/md";
 import { GrWorkshop } from "react-icons/gr";
 import { Tooltip } from "react-tippy";
+import { GrNext } from "react-icons/gr";
+import { GrPrevious } from "react-icons/gr";
 
 const ActividadesTable = () => {
   const [actividades, setActividades] = useState([]);
@@ -107,16 +109,16 @@ const ActividadesTable = () => {
                 key={actividad.idActividad}
                 className="bg-white border-b [&>td]:px-6 [&>td]:py-4 dark:bg-gray-800 dark:border-gray-700"
               >
-                <td scope="row">{actividad.idActividad}</td>
-                <td scope="row">{actividad.users?.name}</td>
-                <td scope="row">{actividad.tipoActividad?.nombre}</td>
-                <td scope="row">{actividad.estado?.nombre}</td>
-                <td scope="row">{actividad.actividad}</td>
-                <td scope="row">{actividad.servicio}</td>
-                <td scope="row">{actividad.horasEstimadas}</td>
-                <td scope="row">{actividad.horasConsumidas}</td>
-                <td scope="row">{actividad.fechaLimite}</td>
-                <td scope="row">
+                <td > {actividad.idActividad}</td>
+                <td > {actividad.users?.name}</td>
+                <td > {actividad.tipoActividad?.nombre}</td>
+                <td > {actividad.estado?.nombre}</td>
+                <td > {actividad.actividad}</td>
+                <td > {actividad.servicio}</td>
+                <td > {actividad.horasEstimadas}</td>
+                <td > {actividad.horasConsumidas}</td>
+                <td > {actividad.fechaLimite}</td>
+                <td className="flex justify-end">
                   <Tooltip title="Editar Actividad">
                     <button
                       onClick={() => setEditActivityId(actividad.idActividad)}
@@ -142,27 +144,38 @@ const ActividadesTable = () => {
 
       {/* Pagination */}
       <div className="flex justify-center items-center mt-4">
-        <button
-          onClick={handlePreviousPage}
-          disabled={currentPage === 1}
-          className={`px-4 py-2 mx-1 ${
-            currentPage === 1 ? "bg-gray-300" : "bg-blue-500"
-          } text-white rounded-lg`}
+        <Tooltip
+        title=" Ir a la página anterior"
         >
-          Previous
-        </button>
+          <button
+            onClick={handlePreviousPage}
+            disabled={currentPage === 1}
+            className={`px-4 py-2 mx-1 ${
+              currentPage === 1 ? "bg-gray-300" : "bg-blue-500"
+            } text-white rounded-lg`}
+          >
+            {/* Previous */}
+            <GrPrevious />
+          </button>
+        </Tooltip>
         <span className="mx-2">
           Page {currentPage} of {totalPages}
         </span>
-        <button
-          onClick={handleNextPage}
-          disabled={currentPage === totalPages}
-          className={`px-4 py-2 mx-1 ${
-            currentPage === totalPages ? "bg-gray-300" : "bg-blue-500"
-          } text-white rounded-lg`}
+        <Tooltip
+        title=" Ir a la página siguiente"
         >
-          Next
-        </button>
+          <button
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+            className={`px-4 py-2 mx-1 ${
+              currentPage === totalPages ? "bg-gray-300" : "bg-blue-500"
+            } text-white rounded-lg`}
+          >
+            {/* Next */}
+            <GrNext />
+          </button>
+
+        </Tooltip>
       </div>
 
       {showAddModal && (
