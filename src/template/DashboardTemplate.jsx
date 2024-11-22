@@ -1,4 +1,5 @@
 import { ActivitiesCalendar } from "@/Components/dashboard/ActivitiesCalendar";
+import DashboardAlert from "@/Components/dashboard/DashboardAlert";
 import { DashboardCards } from "@/Components/dashboard/DashboardCards";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
@@ -42,7 +43,7 @@ export const DashboardTemplate = () => {
               <ActivitiesCalendar/>
             </div>
             <div className="bg-gray-200 rounded-lg p-4">
-              <h2 className="text-lg font-semibold">Contenido Secundario 2</h2>
+              <DashboardAlert/>
             </div>
           </div>
         </div>

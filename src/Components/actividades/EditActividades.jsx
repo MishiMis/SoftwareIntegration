@@ -1,6 +1,7 @@
 // EditActividades.jsx
 import { useState, useEffect } from "react";
 import { supabase } from "../../Js/database/supabaseClient";
+import PropTypes from "prop-types";
 
 const EditActividades = ({ activityId, closeModal, fetchActivities }) => {
   const [formData, setFormData] = useState({
@@ -60,7 +61,7 @@ const EditActividades = ({ activityId, closeModal, fetchActivities }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50">
+    <div className="fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-10">
       <div className="bg-white p-6 rounded-lg shadow-xl w-96">
       {/* Edit Activity */}
         <h2 className="text-2xl font-semibold mb-4 border-b text-center uppercase">Editar Actividad</h2>
@@ -108,5 +109,9 @@ const EditActividades = ({ activityId, closeModal, fetchActivities }) => {
     </div>
   );
 };
-
+EditActividades.propTypes = {
+  activityId: PropTypes.number.isRequired,
+  closeModal: PropTypes.func.isRequired,
+  fetchActivities: PropTypes.func.isRequired,
+};
 export default EditActividades;

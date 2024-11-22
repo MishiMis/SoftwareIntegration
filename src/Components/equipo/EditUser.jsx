@@ -1,17 +1,30 @@
-// EditUser.js
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "../../Js/database/supabaseClient";
+import PropTypes from 'prop-types';
+
 
 const EditUser = ({ user, closeModal, fetchUsers }) => {
   const [formData, setFormData] = useState({
-    username: user.username,
-    name: user.name,
-    lastName: user.lastName,
-    dni: user.dni,
-    telefono: user.telefono,
-    direccion: user.direccion,
+    username: user?.username || "",
+    name: user?.name || "",
+    lastName: user?.lastName || "",
+    dni: user?.dni || "",
+    telefono: user?.telefono || "",
+    direccion: user?.direccion || "",
   });
+
+  useEffect(() => {
+    if (user) {
+      setFormData({
+        username: user.username,
+        name: user.name,
+        lastName: user.lastName,
+        dni: user.dni,
+        telefono: user.telefono,
+        direccion: user.direccion,
+      });
+    }
+  }, [user]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -22,6 +35,11 @@ const EditUser = ({ user, closeModal, fetchUsers }) => {
   };
 
   const handleUpdateUser = async () => {
+    if (!user?.idUsuario) {
+      alert("User ID is missing.");
+      return;
+    }
+
     try {
       const { error } = await supabase
         .from("users")
@@ -33,7 +51,7 @@ const EditUser = ({ user, closeModal, fetchUsers }) => {
           telefono: formData.telefono,
           direccion: formData.direccion,
         })
-        .eq("id", user.id);
+        .eq("idUsuario", user.idUsuario);  // Aseguramos que usamos el campo correcto para la búsqueda
 
       if (error) throw error;
 
@@ -51,80 +69,26 @@ const EditUser = ({ user, closeModal, fetchUsers }) => {
       <div className="bg-white p-6 rounded-lg shadow-lg w-96">
         <h2 className="text-lg font-bold mb-4">Edit User</h2>
 
-        
         <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Username
-            </label>
-            <input
-              type="text"
-              name="username"
-              value={formData.username}
-              onChange={handleInputChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-2"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleInputChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-2"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Last Name
-            </label>
-            <input
-              type="text"
-              name="lastName"
-              value={formData.lastName}
-              onChange={handleInputChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-2"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              DNI
-            </label>
-            <input
-              type="text"
-              name="dni"
-              value={formData.dni}
-              onChange={handleInputChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-2"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Phone
-            </label>
-            <input
-              type="text"
-              name="telefono"
-              value={formData.telefono}
-              onChange={handleInputChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-2"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Address
-            </label>
-            <input
-              type="text"
-              name="direccion"
-              value={formData.direccion}
-              onChange={handleInputChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-2"
-            />
-          </div>
+          {[
+            { label: "Username", name: "username" },
+            { label: "Name", name: "name" },
+            { label: "Last Name", name: "lastName" },
+            { label: "DNI", name: "dni" },
+            { label: "Phone", name: "telefono" },
+            { label: "Address", name: "direccion" }
+          ].map(({ label, name }) => (
+            <div key={name}>
+              <label className="block text-sm font-medium text-gray-700">{label}</label>
+              <input
+                type="text"
+                name={name}
+                value={formData[name]}
+                onChange={handleInputChange}
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 p-2"
+              />
+            </div>
+          ))}
         </div>
 
         <div className="flex justify-end mt-6 space-x-2">
@@ -144,6 +108,14 @@ const EditUser = ({ user, closeModal, fetchUsers }) => {
       </div>
     </div>
   );
+};
+EditUser.propTypes = {
+  user: PropTypes.shape({
+    idUsuario: PropTypes.number.isRequired,
+    username: PropTypes.string, name: PropTypes.string, lastName: PropTypes.string, dni: PropTypes.string, telefono: PropTypes.string, direccion: PropTypes.string
+  }).isRequired,
+  closeModal: PropTypes.func.isRequired,
+  fetchUsers: PropTypes.func.isRequired
 };
 
 export default EditUser;

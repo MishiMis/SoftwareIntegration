@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { supabase } from "../../Js/database/supabaseClient";
+import PropTypes from 'prop-types';
 
 const AddUser = ({ closeModal, fetchUsers }) => {
   const [username, setUsername] = useState("");
@@ -82,6 +83,14 @@ const AddUser = ({ closeModal, fetchUsers }) => {
             className="border p-2 mb-4 w-full"
             required
           />
+                    <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="border p-2 mb-4 w-full"
+            required
+          />
           <input
             type="text"
             placeholder="Name"
@@ -122,14 +131,7 @@ const AddUser = ({ closeModal, fetchUsers }) => {
             className="border p-2 mb-4 w-full"
             required
           />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="border p-2 mb-4 w-full"
-            required
-          />
+
           <button
             type="submit"
             className="px-4 py-2 bg-blue-500 text-white rounded-lg w-full"
@@ -150,3 +152,7 @@ const AddUser = ({ closeModal, fetchUsers }) => {
 };
 
 export default AddUser;
+AddUser.propTypes = {
+  closeModal: PropTypes.func.isRequired,
+  fetchUsers: PropTypes.func.isRequired,
+};

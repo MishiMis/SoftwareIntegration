@@ -9,7 +9,7 @@ Modal.setAppElement("#root");
 
 export const ActivitiesCalendar = () => {
   const [activities, setActivities] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(null);
+  // const [selectedDate, setSelectedDate] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [activitiesForDay, setActivitiesForDay] = useState([]);
 
@@ -30,11 +30,16 @@ export const ActivitiesCalendar = () => {
 
   // Handle day click
   const handleDayClick = (date) => {
-    setSelectedDate(date);
+    // setSelectedDate(date);
     const formattedDate = date.toISOString().split("T")[0];
-    const activitiesOnDate = activities.filter(
-      (activity) => activity.fechaCreacion.split("T")[0] === formattedDate
-    );
+    const activitiesOnDate = activities.filter((activity) => {
+      const activityDate = activity.fechaCreacion;
+      // Verificamos si activity.fechaCreacion es válido
+      if (activityDate && typeof activityDate === "string") {
+        return activityDate.split("T")[0] === formattedDate;
+      }
+      return false; // Si fechaCreacion es inválida, lo ignoramos
+    });
     setActivitiesForDay(activitiesOnDate);
     setModalIsOpen(true);
   };
@@ -49,13 +54,17 @@ export const ActivitiesCalendar = () => {
       <Calendar
         onClickDay={handleDayClick}
         tileClassName={({ date, view }) => {
-          if (view === "month") {
+          if (view === "month" && date) {
             const formattedDate = date.toISOString().split("T")[0];
             if (
-              activities.some(
-                (activity) =>
-                  activity.fechaCreacion.split("T")[0] === formattedDate
-              )
+              activities.some((activity) => {
+                const activityDate = activity.fechaCreacion;
+                // Verificamos si activity.fechaCreacion es válido
+                if (activityDate && typeof activityDate === "string") {
+                  return activityDate.split("T")[0] === formattedDate;
+                }
+                return false;
+              })
             ) {
               return "highlight"; // Clase CSS para días con actividades
             }

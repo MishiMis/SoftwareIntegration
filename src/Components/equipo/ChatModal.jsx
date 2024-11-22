@@ -1,4 +1,5 @@
 import  { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const ChatModal = ({ user, closeChat }) => {
   const [message, setMessage] = useState('');
@@ -51,3 +52,7 @@ const ChatModal = ({ user, closeChat }) => {
 };
 
 export default ChatModal;
+ChatModal.propTypes = {
+  user: PropTypes.object.isRequired,
+  closeChat: PropTypes.func.isRequired,
+};

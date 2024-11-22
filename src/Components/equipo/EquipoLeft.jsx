@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { supabase } from "../../Js/database/supabaseClient";
 import ChatModal from './ChatModal';
 
@@ -11,7 +11,7 @@ const EquipoLeft = () => {
     const getUsers = async () => {
       const { data, error } = await supabase
         .from('users')
-        .select('id, name, role_id')
+        .select('idUsuario, name, role_id')
         .eq('role_id', 1);
 
       if (error) {

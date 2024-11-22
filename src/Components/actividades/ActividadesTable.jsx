@@ -11,17 +11,29 @@ import { GrPrevious } from "react-icons/gr";
 
 const ActividadesTable = () => {
   const [actividades, setActividades] = useState([]);
+  const [proyectos, setProyectos] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(5);
+  const [itemsPerPage] = useState(3);
   const [showAddModal, setShowAddModal] = useState(false);
   const [editActivityId, setEditActivityId] = useState(null);
+  const [selectedProyecto, setSelectedProyecto] = useState(null); // Nuevo estado para el proyecto seleccionado
 
-  const fetchActivities = async () => {
-    const { data, error } = await supabase
+  const fetchProjects = async () => {
+    const { data, error } = await supabase.from("proyectos").select("idProyecto, nombre");
+    if (error) {
+      console.error("Error fetching projects:", error.message);
+    } else {
+      setProyectos(data);
+    }
+  };
+
+  const fetchActivities = async (filterProyectoId = null) => {
+    let query = supabase
       .from("activities")
       .select(`
         idActividad,
         idUsuario,
+        idProyecto,
         idTipo,
         idEstado,
         actividad,
@@ -34,6 +46,12 @@ const ActividadesTable = () => {
         tipoActividad(nombre)
       `);
 
+    if (filterProyectoId) {
+      query = query.eq("idProyecto", filterProyectoId);
+    }
+
+    const { data, error } = await query;
+
     if (error) {
       console.error("Error fetching activities:", error.message);
     } else {
@@ -42,18 +60,31 @@ const ActividadesTable = () => {
   };
 
   useEffect(() => {
+    fetchProjects();
     fetchActivities();
   }, []);
 
-  const handleDelete = async (idActividad) => {
-    const { error } = await supabase
-      .from("activities")
-      .delete()
-      .eq("idActividad", idActividad);
-    if (error) {
+  const handleSearch = () => {
+    if (selectedProyecto) {
+      fetchActivities(selectedProyecto);
+    }
+  };
+
+  const handleDelete = async (actividadId) => {
+    try {
+      const { error } = await supabase
+        .from("activities")
+        .delete()
+        .eq("idActividad", actividadId);
+
+      if (error) {
+        console.error("Error deleting activity:", error.message);
+      } else {
+        fetchActivities(selectedProyecto); // Si tienes filtro por proyecto
+        alert("Actividad eliminada con éxito");
+      }
+    } catch (error) {
       console.error("Error deleting activity:", error.message);
-    } else {
-      fetchActivities();
     }
   };
 
@@ -78,15 +109,40 @@ const ActividadesTable = () => {
 
   return (
     <div className="p-6">
-      <Tooltip title="Crear Actividad">
-        <button
-          onClick={() => setShowAddModal(true)}
-          className="mb-4 px-4 py-2 bg-blue-500 text-white rounded-lg"
-        >
-          <GrWorkshop />
-        </button>
-      </Tooltip>
+      <div className="flex items-center mb-4">
+        <Tooltip title="Crear Actividad">
+          <button
+            onClick={() => setShowAddModal(true)}
+            className="px-4 py-2 bg-blue-500 text-white rounded-lg mr-4"
+          >
+            <GrWorkshop />
+          </button>
+        </Tooltip>
 
+        {/* Lista de Proyectos */}
+        <select
+          value={selectedProyecto || ""}
+          onChange={(e) => setSelectedProyecto(e.target.value)}
+          className="border border-gray-300 rounded-lg p-2"
+        >
+          <option value="">Seleccione un Proyecto</option>
+          {proyectos.map((proyecto) => (
+            <option key={proyecto.idProyecto} value={proyecto.idProyecto}>
+              {proyecto.nombre}
+            </option>
+          ))}
+        </select>
+
+        {/* Botón de Buscar */}
+        <button
+          onClick={handleSearch}
+          className="ml-4 px-4 py-2 bg-green-500 text-white rounded-lg"
+        >
+          Buscar
+        </button>
+      </div>
+
+      {/* Tabla de Actividades */}
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -109,15 +165,15 @@ const ActividadesTable = () => {
                 key={actividad.idActividad}
                 className="bg-white border-b [&>td]:px-6 [&>td]:py-4 dark:bg-gray-800 dark:border-gray-700"
               >
-                <td > {actividad.idActividad}</td>
-                <td > {actividad.users?.name}</td>
-                <td > {actividad.tipoActividad?.nombre}</td>
-                <td > {actividad.estado?.nombre}</td>
-                <td > {actividad.actividad}</td>
-                <td > {actividad.servicio}</td>
-                <td > {actividad.horasEstimadas}</td>
-                <td > {actividad.horasConsumidas}</td>
-                <td > {actividad.fechaLimite}</td>
+                <td>{actividad.idActividad}</td>
+                <td>{actividad.users?.name}</td>
+                <td>{actividad.tipoActividad?.nombre}</td>
+                <td>{actividad.estado?.nombre}</td>
+                <td>{actividad.actividad}</td>
+                <td>{actividad.servicio}</td>
+                <td>{actividad.horasEstimadas}</td>
+                <td>{actividad.horasConsumidas}</td>
+                <td>{actividad.fechaLimite}</td>
                 <td className="flex justify-end">
                   <Tooltip title="Editar Actividad">
                     <button
@@ -144,9 +200,7 @@ const ActividadesTable = () => {
 
       {/* Pagination */}
       <div className="flex justify-center items-center mt-4">
-        <Tooltip
-        title=" Ir a la página anterior"
-        >
+        <Tooltip title="Ir a la página anterior">
           <button
             onClick={handlePreviousPage}
             disabled={currentPage === 1}
@@ -154,16 +208,13 @@ const ActividadesTable = () => {
               currentPage === 1 ? "bg-gray-300" : "bg-blue-500"
             } text-white rounded-lg`}
           >
-            {/* Previous */}
             <GrPrevious />
           </button>
         </Tooltip>
         <span className="mx-2">
           Page {currentPage} of {totalPages}
         </span>
-        <Tooltip
-        title=" Ir a la página siguiente"
-        >
+        <Tooltip title="Ir a la página siguiente">
           <button
             onClick={handleNextPage}
             disabled={currentPage === totalPages}
@@ -171,10 +222,8 @@ const ActividadesTable = () => {
               currentPage === totalPages ? "bg-gray-300" : "bg-blue-500"
             } text-white rounded-lg`}
           >
-            {/* Next */}
             <GrNext />
           </button>
-
         </Tooltip>
       </div>
 
