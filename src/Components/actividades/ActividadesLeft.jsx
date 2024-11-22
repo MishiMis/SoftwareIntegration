@@ -46,8 +46,8 @@ const ActividadesLeft = () => {
     }, []);
 
     return (
-        <div className="p-4">
-            <h2 className="text-xl font-bold mb-4">Distribución de Tipos de Actividades</h2>
+        <div className="p-4 w-full rounded-lg shadow-lg">
+            <h2 className="text-xl font-bold mb-4 text-center text-black uppercase">Distribución de Tipos de Actividades</h2>
             <div className="flex justify-center items-center">
                 <div className="relative w-full h-full" style={{ maxWidth: "400px", maxHeight: "400px" }}>
                     {chartData ? (

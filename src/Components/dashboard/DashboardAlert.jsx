@@ -29,7 +29,7 @@ const DashboardAlert = () => {
 
   return (
     <div className="container mx-auto p-6">
-      <h2 className="text-2xl font-semibold mb-4">Actividades</h2>
+      <h2 className="text-2xl font-semibold mb-4 border-b-2 text-center border-white rounded-md upercase">Actividades</h2>
       {/* Tabla de actividades */}
       <div className="overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">

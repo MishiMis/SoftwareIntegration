@@ -49,7 +49,7 @@ const ActividadesRigth = () => {
   const totalPages = Math.ceil(activities.length / itemsPerPage);
 
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div className="relative overflow-x-auto shadow-md sm:rounded-lg p-4 w-full ">
       {/* Tabla de actividades */}
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -96,7 +96,7 @@ const ActividadesRigth = () => {
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-10">
           <div className="bg-white p-6 rounded shadow-lg w-1/3">
             <h3 className="text-lg font-semibold">Reportes</h3>
             <p>No hay reportes pendientes.</p>

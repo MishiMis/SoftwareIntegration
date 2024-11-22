@@ -67,7 +67,7 @@ const AddUser = ({ closeModal, fetchUsers }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
       <div className="bg-white p-6 rounded-lg w-96">
-        <h2 className="text-xl font-bold mb-4">Add User</h2>
+        <h2 className="text-xl font-bold mb-4 uppercase text-center border-b-2">Agregar Usuario</h2>
         {errorMessage && <div className="text-red-500 mb-4">{errorMessage}</div>}
         <form
           onSubmit={(e) => {
@@ -137,14 +137,14 @@ const AddUser = ({ closeModal, fetchUsers }) => {
             className="px-4 py-2 bg-blue-500 text-white rounded-lg w-full"
             disabled={loading}
           >
-            {loading ? "Adding..." : "Add User"}
+            {loading ? "Adding..." : "Agregar usuario"}
           </button>
         </form>
         <button
           onClick={closeModal}
           className="mt-4 text-sm text-red-500 hover:text-red-700"
         >
-          Close
+          Cerrar
         </button>
       </div>
     </div>

@@ -4,16 +4,20 @@ import PropTypes from 'prop-types';
 
 const AddActividades = ({ closeModal, fetchActivities }) => {
   const [formData, setFormData] = useState({
+
     idUsuario: "",
     idTipo: "",
     idEstado: "",
     idProyecto: "",
     actividad: "",
     servicio: "",
-    horasEstimadas: "",
-    horasConsumidas: "",
+    // horasConsumidas: "",
     fechaLimite: "",
     fechaCreacion: "",  // Añadimos fechaCreacion
+    ingreseActividad: "",  // Añadimos ingreseActivida
+    ingreseServicios: "",
+    horasEstimadas: "",
+    horasConsumidas:""
   });
 
   const [users, setUsers] = useState([]);
@@ -96,10 +100,11 @@ const AddActividades = ({ closeModal, fetchActivities }) => {
 
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-10">
-      <div className="bg-white p-6 rounded-lg shadow-xl w-96">
+
+      <div className="bg-white p-6 rounded-lg shadow-xl flex-[0_1_40rem] min-h-[75vh]">
         <h2 className="text-2xl font-semibold mb-6 text-center uppercase border-b border-gray-400">Crear Actividad</h2>
 
-        <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+        <form onSubmit={handleSubmit} className="max-w-full  max-h-[75vh] overflow-y-auto pr-4 ">
           <div className="grid md:grid-cols-2 md:gap-4">
             
             {/* Campo idUsuario con lista de usuarios */}
@@ -235,6 +240,8 @@ const AddActividades = ({ closeModal, fetchActivities }) => {
             {Object.keys(formData).map((field) =>
               field !== "idUsuario" && field !== "idTipo" && field !== "idEstado" && field !== "idProyecto" && field !== "fechaCreacion" ? (
                 <div key={field} className="relative z-0 w-full mb-5 group">
+                  
+                  <label htmlFor="">{field.charAt(0).toUpperCase() + field.slice(1)}</label>
                   <input
                     type={field === "fechaLimite" ? "date" : "text"}
                     id={field}
@@ -249,20 +256,23 @@ const AddActividades = ({ closeModal, fetchActivities }) => {
             )}
           </div>
 
-          <button // Close button
-            type="button"
-            onClick={closeModal}
-            className="py-2 px-4 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 focus:outline-none"
-          >
-            Cerrar
-          </button>
+          <div className="flex justify-end gap-4">
+            <button // Close button
+              type="button"
+              onClick={closeModal}
+              className="py-2 px-4 border border-gray-400 text-gray-700 rounded-lg hover:bg-red-600/10 focus:outline-none"
+            >
+              Cerrar
+            </button>
 
-          <button // Submit button
-            type="submit"
-            className="py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none"
-          >
-            Guardar
-          </button>
+            <button // Submit button
+              type="submit"
+              className="py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none"
+            >
+              Guardar
+            </button>
+
+          </div>
           
         </form>
       </div>
