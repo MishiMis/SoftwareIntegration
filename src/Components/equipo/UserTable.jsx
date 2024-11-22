@@ -116,13 +116,13 @@ const UserTable = () => {
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr className="[&>th]:px-6 [&>th]:py-3">
-                <th scope="col">Username</th>
-                <th scope="col">Name</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Nombre</th>
                 <th scope="col">Last Name</th>
                 <th scope="col">DNI</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Address</th>
-                <th scope="col">Actions</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Acciones</th>
               </tr>
             </thead>
             <tbody>

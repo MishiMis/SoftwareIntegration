@@ -12,7 +12,6 @@ const EquipoTemplate = () => {
           <EquipoLeft/>
         </div>
         <div className=" bg-gradient-to-r from-gray-100 to-gray-300 flex items-center justify-center rounded-lg">
-          <p>Pequeño 2</p>
         </div>
       </div>
     </div>

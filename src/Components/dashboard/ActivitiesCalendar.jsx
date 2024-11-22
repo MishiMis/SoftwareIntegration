@@ -51,27 +51,27 @@ export const ActivitiesCalendar = () => {
 
   return (
     <div className="p-4">
-      <Calendar
-        onClickDay={handleDayClick}
-        tileClassName={({ date, view }) => {
-          if (view === "month" && date) {
-            const formattedDate = date.toISOString().split("T")[0];
-            if (
-              activities.some((activity) => {
-                const activityDate = activity.fechaCreacion;
-                // Verificamos si activity.fechaCreacion es válido
-                if (activityDate && typeof activityDate === "string") {
-                  return activityDate.split("T")[0] === formattedDate;
-                }
-                return false;
-              })
-            ) {
-              return "highlight"; // Clase CSS para días con actividades
-            }
-          }
-          return null;
-        }}
-      />
+<div className="fullscreen-calendar-container">
+  <Calendar
+    className="calendar"
+    tileClassName={({ date, view }) => {
+      if (view === "month") {
+        const formattedDate = date.toISOString().split("T")[0];
+        if (
+          activities.some((activity) => {
+            const activityDate = activity.fechaCreacion;
+            return activityDate && activityDate.split("T")[0] === formattedDate;
+          })
+        ) {
+          return "highlight";
+        }
+      }
+      return null;
+    }}
+  />
+</div>
+
+
 
       {/* Modal */}
       <Modal

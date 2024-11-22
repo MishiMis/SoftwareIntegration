@@ -2,12 +2,11 @@ import { useState, useEffect } from "react";
 import { supabase } from "../../Js/database/supabaseClient";
 import AddActividades from "./AddActividades";
 import EditActividades from "./EditActividades";
+import ModalActivities from "./ModalActivities.jsx"; // Importamos el nuevo modal
 import { LuClipboardEdit } from "react-icons/lu";
 import { MdAutoDelete } from "react-icons/md";
-import { GrWorkshop } from "react-icons/gr";
+import { GrWorkshop, GrNext, GrPrevious } from "react-icons/gr";
 import { Tooltip } from "react-tippy";
-import { GrNext } from "react-icons/gr";
-import { GrPrevious } from "react-icons/gr";
 
 const ActividadesTable = () => {
   const [actividades, setActividades] = useState([]);
@@ -15,8 +14,9 @@ const ActividadesTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(3);
   const [showAddModal, setShowAddModal] = useState(false);
+  const [showProjectModal, setShowProjectModal] = useState(false); // Estado para el modal de proyectos
   const [editActivityId, setEditActivityId] = useState(null);
-  const [selectedProyecto, setSelectedProyecto] = useState(null); // Nuevo estado para el proyecto seleccionado
+  const [selectedProyecto, setSelectedProyecto] = useState(null);
 
   const fetchProjects = async () => {
     const { data, error } = await supabase.from("proyectos").select("idProyecto, nombre");
@@ -78,13 +78,13 @@ const ActividadesTable = () => {
         .eq("idActividad", actividadId);
 
       if (error) {
-        console.error("Error deleting activity:", error.message);
+        console.error("Error al borrar la actividad:", error.message);
       } else {
-        fetchActivities(selectedProyecto); // Si tienes filtro por proyecto
+        fetchActivities(selectedProyecto);
         alert("Actividad eliminada con éxito");
       }
     } catch (error) {
-      console.error("Error deleting activity:", error.message);
+      console.error("Error al borrar la actividad:", error.message);
     }
   };
 
@@ -133,12 +133,19 @@ const ActividadesTable = () => {
           ))}
         </select>
 
-        {/* Botón de Buscar */}
         <button
           onClick={handleSearch}
           className="ml-4 px-4 py-2 bg-green-500 text-white rounded-lg"
         >
           Buscar
+        </button>
+
+        {/* Botón Agregar Proyecto */}
+        <button
+          onClick={() => setShowProjectModal(true)}
+          className="ml-4 px-4 py-2 bg-purple-500 text-white rounded-lg"
+        >
+          Agregar Proyecto
         </button>
       </div>
 
@@ -239,6 +246,13 @@ const ActividadesTable = () => {
           activityId={editActivityId}
           closeModal={() => setEditActivityId(null)}
           fetchActivities={fetchActivities}
+        />
+      )}
+
+      {showProjectModal && (
+        <ModalActivities
+          closeModal={() => setShowProjectModal(false)}
+          fetchProjects={fetchProjects}
         />
       )}
     </div>

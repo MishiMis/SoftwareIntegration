@@ -36,11 +36,11 @@ export const items = [
     icon: <TbReport />,
     label: <Link to="/reportes">Reportes</Link>,
   },
-  {
-    key: '6',
-    icon: <IoIosSettings />,
-    label: <Link to="/configuraciones">Configuraciones</Link>,
-  },
+  // {
+  //   key: '6',
+  //   icon: <IoIosSettings />,
+  //   label: <Link to="/configuraciones">Configuraciones</Link>,
+  // },
   {
     key: '7',
     label: <Link to="/">Salir</Link>,

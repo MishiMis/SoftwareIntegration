@@ -4,20 +4,16 @@ import PropTypes from 'prop-types';
 
 const AddActividades = ({ closeModal, fetchActivities }) => {
   const [formData, setFormData] = useState({
-
     idUsuario: "",
     idTipo: "",
     idEstado: "",
     idProyecto: "",
     actividad: "",
     servicio: "",
-    // horasConsumidas: "",
+    horasEstimadas: "",
+    horasConsumidas: "",
     fechaLimite: "",
     fechaCreacion: "",  // Añadimos fechaCreacion
-    ingreseActividad: "",  // Añadimos ingreseActivida
-    ingreseServicios: "",
-    horasEstimadas: "",
-    horasConsumidas:""
   });
 
   const [users, setUsers] = useState([]);
@@ -100,16 +96,14 @@ const AddActividades = ({ closeModal, fetchActivities }) => {
 
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50 z-10">
-
-      <div className="bg-white p-6 rounded-lg shadow-xl flex-[0_1_40rem] min-h-[75vh]">
+      <div className="bg-white p-6 rounded-lg shadow-xl w-full sm:w-96">
         <h2 className="text-2xl font-semibold mb-6 text-center uppercase border-b border-gray-400">Crear Actividad</h2>
 
-        <form onSubmit={handleSubmit} className="max-w-full  max-h-[75vh] overflow-y-auto pr-4 ">
-          <div className="grid md:grid-cols-2 md:gap-4">
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             
             {/* Campo idUsuario con lista de usuarios */}
-            <div className="relative z-0 w-full mb-5 group">
-              
+            <div className="w-full">
               <label htmlFor="idUsuario" className="block text-sm font-medium text-gray-700">
                 Usuario
               </label>
@@ -118,12 +112,10 @@ const AddActividades = ({ closeModal, fetchActivities }) => {
                 name="idUsuario"
                 value={formData.idUsuario}
                 onChange={handleChange}
-                className="block w-full py-2 px-3 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 required
               >
-                <option value="" disabled>
-                  Selecciona un usuario
-                </option>
+                <option value="" disabled>Selecciona un usuario</option>
                 {users.map((user) => (
                   <option key={user.idUsuario} value={user.idUsuario}>
                     {user.name}
@@ -133,7 +125,7 @@ const AddActividades = ({ closeModal, fetchActivities }) => {
             </div>
 
             {/* Campo idTipo con lista de tipoActividad */}
-            <div className="relative z-0 w-full mb-5 group">
+            <div className="w-full">
               <label htmlFor="idTipo" className="block text-sm font-medium text-gray-700">
                 Tipo de Actividad
               </label>
@@ -142,12 +134,10 @@ const AddActividades = ({ closeModal, fetchActivities }) => {
                 name="idTipo"
                 value={formData.idTipo}
                 onChange={handleChange}
-                className="block w-full py-2 px-3 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 required
               >
-                <option value="" disabled>
-                  Selecciona un tipo de actividad
-                </option>
+                <option value="" disabled>Selecciona un tipo de actividad</option>
                 {tipoActividad.map((tipo) => (
                   <option key={tipo.idTipo} value={tipo.idTipo}>
                     {tipo.nombre}
@@ -157,7 +147,7 @@ const AddActividades = ({ closeModal, fetchActivities }) => {
             </div>
 
             {/* Campo idEstado con lista de estados */}
-            <div className="relative z-0 w-full mb-5 group">
+            <div className="w-full">
               <label htmlFor="idEstado" className="block text-sm font-medium text-gray-700">
                 Estado
               </label>
@@ -166,12 +156,10 @@ const AddActividades = ({ closeModal, fetchActivities }) => {
                 name="idEstado"
                 value={formData.idEstado}
                 onChange={handleChange}
-                className="block w-full py-2 px-3 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 required
               >
-                <option value="" disabled>
-                  Selecciona un estado
-                </option>
+                <option value="" disabled>Selecciona un estado</option>
                 {estado.map((estadoItem) => (
                   <option key={estadoItem.idEstado} value={estadoItem.idEstado}>
                     {estadoItem.nombre}
@@ -181,7 +169,7 @@ const AddActividades = ({ closeModal, fetchActivities }) => {
             </div>
 
             {/* Campo idProyecto con lista de proyectos */}
-            <div className="relative z-0 w-full mb-5 group">
+            <div className="w-full">
               <label htmlFor="idProyecto" className="block text-sm font-medium text-gray-700">
                 Proyecto
               </label>
@@ -190,12 +178,10 @@ const AddActividades = ({ closeModal, fetchActivities }) => {
                 name="idProyecto"
                 value={formData.idProyecto}
                 onChange={handleChange}
-                className="block w-full py-2 px-3 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 required
               >
-                <option value="" disabled>
-                  Selecciona un proyecto
-                </option>
+                <option value="" disabled>Selecciona un proyecto</option>
                 {proyectos.map((proyecto) => (
                   <option key={proyecto.idProyecto} value={proyecto.idProyecto}>
                     {proyecto.nombre}
@@ -205,7 +191,7 @@ const AddActividades = ({ closeModal, fetchActivities }) => {
             </div>
 
             {/* Campo fechaCreacion */}
-            <div className="relative z-0 w-full mb-5 group">
+            <div className="w-full">
               <label htmlFor="fechaCreacion" className="block text-sm font-medium text-gray-700">
                 Fecha de Creación
               </label>
@@ -215,40 +201,25 @@ const AddActividades = ({ closeModal, fetchActivities }) => {
                 name="fechaCreacion"
                 value={formData.fechaCreacion}
                 onChange={handleChange}
-                className="block py-2 px-3 mt-1 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
                 required
               />
             </div>
 
-            {/* Campo fechaLimite */}
-            {/* <div className="relative z-0 w-full mb-5 group">
-              <label htmlFor="fechaLimite" className="block text-sm font-medium text-gray-700">
-                Fecha Limite
-              </label>
-              <input
-                type="date"
-                id="fechaLimite"
-                name="fechaLimite"
-                value={formData.fechaLimite}
-                onChange={handleChange}
-                className="block py-2 px-3 mt-1 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
-                required
-              />
-            </div> */}
-
             {/* Resto de campos */}
             {Object.keys(formData).map((field) =>
               field !== "idUsuario" && field !== "idTipo" && field !== "idEstado" && field !== "idProyecto" && field !== "fechaCreacion" ? (
-                <div key={field} className="relative z-0 w-full mb-5 group">
-                  
-                  <label htmlFor="">{field.charAt(0).toUpperCase() + field.slice(1)}</label>
+                <div key={field} className="w-full">
+                  <label htmlFor={field} className="block text-sm font-medium text-gray-700">
+                    {field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
+                  </label>
                   <input
                     type={field === "fechaLimite" ? "date" : "text"}
                     id={field}
                     name={field}
                     value={formData[field]}
                     onChange={handleChange}
-                    className="block py-2 px-3 mt-1 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
                     placeholder={`Ingrese ${field}`}
                   />
                 </div>
@@ -256,31 +227,31 @@ const AddActividades = ({ closeModal, fetchActivities }) => {
             )}
           </div>
 
-          <div className="flex justify-end gap-4">
-            <button // Close button
+          <div className="flex justify-between">
+            <button
               type="button"
               onClick={closeModal}
-              className="py-2 px-4 border border-gray-400 text-gray-700 rounded-lg hover:bg-red-600/10 focus:outline-none"
+              className="py-2 px-4 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 focus:outline-none"
             >
               Cerrar
             </button>
 
-            <button // Submit button
+            <button
               type="submit"
               className="py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none"
             >
               Guardar
             </button>
-
           </div>
-          
         </form>
       </div>
     </div>
   );
 };
+
 AddActividades.propTypes = {
   closeModal: PropTypes.func.isRequired,
   fetchActivities: PropTypes.func.isRequired,
 };
+
 export default AddActividades;
