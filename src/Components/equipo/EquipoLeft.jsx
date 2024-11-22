@@ -34,15 +34,15 @@ const EquipoLeft = () => {
   };
 
   return (
-    <div className="container mx-auto">
-      <table className="table-auto w-full bg-white shadow-md rounded-lg">
-        <thead>
-          <tr className="bg-gray-200">
-            <th className="py-2 px-4 text-left">Nombre</th>
-            <th className="py-2 px-4 text-left">Acciones</th>
+    <div className="relative overflow-x-auto rounded-lg">
+      <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
+          <tr >
+            <th className="px-6 py-3 text-left">Nombre</th>
+            <th className="px-6 py-3 text-left">Acciones</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
           {users.map((user) => (
             <tr key={user.id} className="border-b">
               <td className="py-2 px-4">{user.name}</td>
